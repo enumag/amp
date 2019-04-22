@@ -39,9 +39,9 @@ trait Producer
     /**
      * {@inheritdoc}
      */
-    public function advance(/* $value */): Promise
+    public function advance(/* $value = null */): Promise
     {
-        $value = func_get_arg(0);
+        $value = func_get_args()[0] ?? null;
         
         if ($this->waiting !== null) {
             throw new \Error("The prior promise returned must resolve before invoking this method again");
