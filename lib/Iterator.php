@@ -16,7 +16,7 @@ interface Iterator
      * @throws \Error If the prior promise returned from this method has not resolved.
      * @throws \Throwable The exception used to fail the iterator.
      */
-    public function advance(): Promise;
+    public function advance(/* $value = null */): Promise;
 
     /**
      * Gets the last emitted value or throws an exception if the iterator has completed.
