@@ -19,9 +19,9 @@ class PrivateIterator implements Iterator
         $this->iterator = $iterator;
     }
 
-    public function advance(): Promise
+    public function advance(/* $value = null */): Promise
     {
-        return $this->iterator->advance();
+        return $this->iterator->advance(func_get_args()[0] ?? null);
     }
 
     public function getCurrent()
