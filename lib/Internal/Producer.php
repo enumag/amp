@@ -39,8 +39,10 @@ trait Producer
     /**
      * {@inheritdoc}
      */
-    public function advance(): Promise
+    public function advance(/* $value */): Promise
     {
+        $value = func_get_arg(0);
+        
         if ($this->waiting !== null) {
             throw new \Error("The prior promise returned must resolve before invoking this method again");
         }
@@ -48,7 +50,7 @@ trait Producer
         if (isset($this->backPressure[$this->position])) {
             $future = $this->backPressure[$this->position];
             unset($this->values[$this->position], $this->backPressure[$this->position]);
-            $future->resolve();
+            $future->resolve($value);
         }
 
         ++$this->position;
